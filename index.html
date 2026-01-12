@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wokenv - The perfect blend for WordPress development. Docker-based WordPress development environment with Node.js, Docker, and wp-env pre-configured.">
+    <meta name="keywords" content="WordPress, development, environment, Docker, wp-env, Node.js">
+    <title>Wokenv - The Perfect Blend for WordPress Development</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Wokenv - WordPress Development Environment">
+    <meta property="og:description" content="The perfect blend for WordPress development">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:type" content="website">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d3e50;
+            --secondary: #00a9e0;
+            --accent: #00d4ff;
+            --dark: #1a252f;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><text x="10" y="50" font-family="monospace" font-size="20" fill="rgba(255,255,255,0.05)">010101</text></svg>');
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero a {
+            color: var(--white);
+        }
+
+        .hero a:hover {
+            color: var(--white);
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        /* Get Started Section */
+        .get-started {
+            background: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .get-started h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .install-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid var(--secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            box-shadow: 0 4px 20px rgba(0, 169, 224, 0.1);
+        }
+
+        .install-command {
+            background: var(--dark);
+            color: #4af626;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: .9rem;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow-x: scroll;
+            text-wrap: nowrap;
+        }
+
+        .install-command::before {
+            content: '$ ';
+            color: var(--accent);
+        }
+
+        .copy-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 169, 224, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--light);
+            padding: 4rem 2rem;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 169, 224, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Quick Links Section */
+        .quick-links {
+            background: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .quick-links h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .links-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 169, 224, 0.3);
+        }
+
+        /* GitHub Stats */
+        .github-stats {
+            background: var(--light);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-item img {
+            height: 22px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--accent);
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        /* Copy notification */
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="logo.png" alt="Wokenv Logo" class="logo">
+            <h1>Wokenv</h1>
+            <p class="tagline">The Perfect Blend for WordPress Development</p>
+            <p class="subtitle">
+                Docker-based WordPress development environment with Node.js, Docker, and <a target="_blank" href="https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/">@wordpress/env</a> pre-configured.<br>
+                No Node.js installation needed. Just run and develop.
+            </p>
+        </div>
+    </section>
+
+    <!-- Get Started Section -->
+    <section class="get-started">
+        <h2>Get Started in Seconds</h2>
+        <div class="install-box">
+            <div class="install-command" id="installCommand">
+curl -fsSL https://raw.githubusercontent.com/wokenv/wokenv/main/install.sh | bash
+            </div>
+            <button class="copy-btn" onclick="copyCommand()">📋 Copy Command</button>
+        </div>
+        <p style="color: var(--gray); margin-top: 1rem;">
+            Then run <code style="background: var(--light); padding: 0.25rem 0.5rem; border-radius: 4px;">wokenv init</code> in your project directory
+        </p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3>Official WordPress Tools</h3>
+                <p>Built on <a target="_blank" href="https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/">@wordpress/env</a>, the official WordPress development environment used by core contributors.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Zero Configuration</h3>
+                <p>Works out of the box. No Node.js installation needed on your host machine. Everything runs in Docker.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Smart Permissions</h3>
+                <p>Automatically handles file permissions between host and containers. No more sudo headaches.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🛠️</div>
+                <h3>Essential Services</h3>
+                <p>Includes Mailpit for email testing and phpMyAdmin for database management. Ready to use.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Centralized Updates</h3>
+                <p>Update Wokenv once, all projects benefit. Configuration lives in ~/.wokenv, projects stay clean.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Multi-Project Ready</h3>
+                <p>Run multiple WordPress projects simultaneously with isolated environments and different PHP versions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links">
+        <h2>Quick Links</h2>
+        <div class="links-grid">
+            <a href="https://github.com/wokenv/wokenv" class="link-button">📖 Documentation</a>
+            <a href="https://github.com/wokenv/wokenv#quick-start" class="link-button">🚀 Quick Start</a>
+            <a href="https://github.com/wokenv/wokenv/issues" class="link-button">🐛 Report Issues</a>
+            <a href="https://hub.docker.com/r/frugan/wokenv" class="link-button">🐳 Docker Hub</a>
+        </div>
+    </section>
+
+    <!-- GitHub Stats -->
+    <section class="github-stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <img src="https://img.shields.io/github/stars/wokenv/wokenv?style=social" alt="GitHub Stars">
+            </div>
+            <div class="stat-item">
+                <img src="https://img.shields.io/docker/pulls/frugan/wokenv" alt="Docker Pulls">
+            </div>
+            <div class="stat-item">
+                <img src="https://img.shields.io/github/license/wokenv/wokenv" alt="License">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 <a href="https://frugan.it">Frugan</a>. Licensed under <a href="https://choosealicense.com/licenses/gpl-3.0/">GNU GPLv3</a></p>
+            <p style="margin-top: 1rem;">
+                Just like a <strong>wok</strong> expertly combines diverse ingredients into a harmonious dish,<br>
+                <strong>Wokenv</strong> blends <strong>W</strong>ordPress, D<strong>o</strong>c<strong>k</strong>er, and wp-<strong>env</strong> into one powerful development environment.
+            </p>
+            <div class="footer-links">
+                <a href="https://github.com/wokenv/wokenv">GitHub</a>
+                <a href="https://github.com/wokenv/wokenv/blob/main/CHANGELOG.md">Changelog</a>
+                <a href="https://github.com/wokenv/wokenv/blob/main/LICENSE">License</a>
+                <a href="https://buymeacoff.ee/frugan">☕ Buy Me a Coffee</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Copy Notification -->
+    <div class="copy-notification" id="copyNotification">
+        ✅ Command copied to clipboard!
+    </div>
+
+    <script>
+        function copyCommand() {
+            const command = document.getElementById('installCommand').textContent.trim();
+            navigator.clipboard.writeText(command).then(() => {
+                showNotification();
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
